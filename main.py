@@ -1,16 +1,13 @@
 def get_amount_out(amount_in: int, token_in_is_token0: bool, reserves: tuple[int, int], fee: float = 0.003) -> int:
     """
-    模拟 Uniswap V2 getAmountOut 公式。
-    输入：
-    - amount_in: 输入代币数量（int，最小单位，如 wei 或代币最小单位）。
-    - token_in_is_token0: True 如果输入代币是池子的 token0（例如 USDC），False 如果是 token1（例如 WETH）。
-    - reserves: 池子交换前储备元组 (reserve0, reserve1)（int，最小单位；reserve0 为 token0/USDC，reserve1 为 token1/WETH）。
-    - fee: 池子费用率（float，如 0.003 表示 0.3%）。
-
-    输出：输出代币数量（int，最小单位）。
-
-    公式：amount_out = (amount_in * fee_multiplier * reserve_out) // (reserve_in * 1000 + amount_in * fee_multiplier)
-    其中 fee_multiplier = 1000 * (1 - fee)，使用整数运算模拟 Solidity 精度。
+Simulate the getAmountOut formula of Uniswap V2. Input:
+- amount_in: Input token quantity (int, minimum unit, such as wei or the minimum unit of the token).
+- token_in_is_token0: True if the input token is token0 of the pool (e.g. USDC), False if it is token1 (e.g. WETH).
+- reserves: Tuple of reserves before exchange (reserve0, reserve1) (int, minimum unit; reserve0 is token0/USDC, reserve1 is token1/WETH).
+- fee: Pool fee rate (float, such as 0.003 indicates 0.3%).
+Output: Number of output tokens (int, minimum unit).
+Formula: amount_out = (amount_in * fee_multiplier * reserve_out) // (reserve_in * 1000 + amount_in * fee_multiplier)
+Where fee_multiplier = 1000 * (1 - fee), using integer operations to simulate the precision of Solidity.
     """
     reserve0, reserve1 = reserves
     if token_in_is_token0:
